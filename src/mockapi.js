@@ -59,6 +59,10 @@ app.post('/mock/add', function(req, res) {
     }
 });
 
+/**
+ * Deletes item from database. If it can't find it it simply tells that it has
+ * been deleted
+ */
 app.delete('/mock/remove/:id', function(req, res) {
     for (var i = 0; i < data.items.length; i++) {
         if (req.params.id == data.items[i].id) {
@@ -70,6 +74,9 @@ app.delete('/mock/remove/:id', function(req, res) {
     res.send({status: "deleted"});
 });
 
+/**
+ * Edits item in database but only editable fields
+ */
 app.put('/mock/edit/:id', function(req, res) {
     for (var i = 0; i < data.items.length; i++) {
         if (req.params.id == data.items[i].id) {
@@ -88,7 +95,9 @@ app.put('/mock/edit/:id', function(req, res) {
     res.send({status: "error"});
 });
 
-
+/**
+ * Starts the actual server
+ */
 app.listen(conf.port, function() {
     console.log("Mocks are listening at "+conf.port)
 });
@@ -102,7 +111,7 @@ var showAll = function() {
 };
 
 /**
- * Finds lowest unused id
+ * Finds available id
  * @returns {Number}
  */
 var lowestPossibleId = function() {
