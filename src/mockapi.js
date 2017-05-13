@@ -60,11 +60,32 @@ app.post('/mock/add', function(req, res) {
 });
 
 app.delete('/mock/remove/:id', function(req, res) {
-
+    for (var i = 0; i < data.items.length; i++) {
+        if (req.params.id == data.items[i].id) {
+            data.items.splice(i, 1);
+            res.send({status: "deleted", id: req.params.id});
+            return;
+        }
+    }
+    res.send({status: "deleted"});
 });
 
 app.put('/mock/edit/:id', function(req, res) {
-
+    for (var i = 0; i < data.items.length; i++) {
+        if (req.params.id == data.items[i].id) {
+            if (req.body.task.toString().length > 0) {
+                data.items[i].task = req.body.task;
+                // task can never be an empty string
+            }
+            if (Number(req.body.dueDate) >= (new Date()).getMilliseconds()) {
+                // cannot set deadlines to the past, sorry for that
+                data.items[i].dueDate = req.body.dueDate;
+            }
+            res.send({status: "edited", item: data.items[i]});
+            return;
+        }
+    }
+    res.send({status: "error"});
 });
 
 
