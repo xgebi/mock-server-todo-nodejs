@@ -1,0 +1,19 @@
+{
+  "name": "todo-app-mock",
+  "version": "1.0.0",
+  "description": "Simple REST API mock for my todo-app",
+  "main": "index.js",
+  "scripts": {
+    "start": "node src/mockapi.js"
+  },
+  "keywords": [
+    "mock",
+    "api"
+  ],
+  "author": "Sarah Gebauer",
+  "license": "MIT",
+  "dependencies": {
+    "body-parser": "^1.17.1",
+    "express": "^4.15.2"
+  }
+}
